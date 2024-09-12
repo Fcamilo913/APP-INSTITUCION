@@ -113,6 +113,10 @@ require_once "../conexion/metodosCrud.php";
             </thead>
             <tbody>
                           
+
+
+
+            <h1>tehtehghdgsdbbbbbbbbbbbhhghggdb</h1>
             <?php
 
             $id = $_SESSION['correo'];
