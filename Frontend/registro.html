@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="restro.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Formulario de Registro</h1>
+        <form action="../conexion/registroback.php" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required autocomplete="off">
+            
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required autocomplete="off">
+            
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" required autocomplete="off">
+
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" required autocomplete="off">
+            
+            <label for="Rol">Rol:</label>
+            <select id="rol" name="rol" required>
+                <option value="" disabled selected>Selecciona tu rol</option>
+                <option value="Profesor">Profesor</option>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Administrador">Administrador</option>
+            </select>
+            
+            <!-- Campo adicional para la asignatura con opciones predefinidas -->
+            <div id="asignatura-container" style="display: none;">
+                <label for="materia">Asignatura:</label>
+                <select id="asignatura" name="materia">
+                    <option value="" disabled selected>Selecciona una asignatura</option>
+                    <option value="Matematicas">Matemáticas</option>
+                    <option value="Historia">Historia</option>
+                    <option value="Ciencias">Ciencias</option>
+                    <option value="Literatura">Literatura</option>
+                    <option value="Geografia">Geografía</option>
+                </select>
+            </div>
+            
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('rol').addEventListener('change', function() {
+            var asignaturaContainer = document.getElementById('asignatura-container');
+            if (this.value === 'Profesor') {
+                asignaturaContainer.style.display = 'block';
+            } else {
+                asignaturaContainer.style.display = 'none';
+            }
+        });
+    </script>
+
+    <style>
+        /* Reset de márgenes y padding para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background: linear-gradient(to right, #05977c, #acb6e5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Estilo del contenedor del formulario */
+.form-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 450px;
+    width: 100%;
+    transform: scale(1);
+    transition: transform 0.3s;
+}
+
+/* Animación al pasar el mouse sobre el contenedor del formulario */
+.form-container:hover {
+    transform: scale(1.02);
+}
+
+/* Estilo del encabezado del formulario */
+.form-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Estilo de las etiquetas del formulario */
+form label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Estilo de los campos de entrada */
+form input[type="text"],
+form input[type="password"],
+form select {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Efecto al enfocar los campos de entrada */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form select:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Estilo del botón de envío */
+form button {
+    width: 100%;
+    padding: 15px;
+    background: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+/* Efecto al pasar el mouse sobre el botón de envío */
+form button:hover {
+    background: #0056b3;
+}
+
+/* Estilo para campos de selección */
+form select {
+    background: #f9f9f9;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+    }
+    
+    form input[type="text"],
+    form input[type="password"],
+    form select {
+        width: calc(100% - 16px);
+        font-size: 14px;
+    }
+    
+    form button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    
+}
+
+    </style>
+</body>
+</html>

@@ -1,0 +1,123 @@
+?php
+require_once "conexion.php";
+require_once "metodosCrud.php";
+
+// Verifica que los campos esperados están presentes en $_POST
+if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contraseña'], $_POST['rol'], $_POST['materia'])) {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $correo = $_POST['correo'];
+    $pass = $_POST['contraseña'];
+    $rol = $_POST['rol'];
+    $nombre_asignatura = $_POST['materia'];
+
+    // Hash de la contraseña
+    $hassPassword = password_hash($pass, PASSWORD_BCRYPT);
+
+    $objeto = new metodos();
+
+    // Inserción del usuario
+    $datos_usuario = array($nombre, $apellido, $correo, $hassPassword, $rol);
+    $id_insert = $objeto->insertarUsuario($datos_usuario);
+
+    if ($id_insert) {
+        // Inserción del registro académico
+        $datos_academicos = array($id_insert, $nombre_asignatura);
+        $resultado_insercion = $objeto->insertarRegistroAcademico($datos_academicos);
+
+        if ($resultado_insercion) {
+            // Redirecciona según el rol del usuario
+            switch ($rol) {
+                case 'administrador':
+                    header("Location: ../Frontend/tabla_usuarios.php");
+                    exit();
+                case 'profesor':
+                    header("Location: ../Frontend/profesor_dashboard.php");
+                    exit();
+                case 'estudiante':
+                    header("Location: ../Frontend/estudiante_dashboard.php");
+                    exit();
+                default:
+                    $mensaje = "Rol no reconocido.";
+                    $mensaje_clase = "error";
+                    break;
+            }
+        } else {
+            $mensaje = "Error al registrar los datos académicos.";
+            $mensaje_clase = "error";
+        }
+    } else {
+        $mensaje = "Error al insertar el usuario.";
+        $mensaje_clase = "error";
+    }
+} else {
+    $mensaje = "Faltan datos en el formulario.";
+    $mensaje_clase = "error";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .message-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .message-box h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .message-box p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .message-box a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+        .message-box a:hover {
+            text-decoration: underline;
+        }
+        .success {
+            color: #28a745;
+        }
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h1 class="<?php echo $mensaje_clase; ?>"><?php echo $mensaje; ?></h1>
+        <p>Haga clic para volver al <a href="../Frontend/login.html">login</a>.</p>
+    </div>
+</body>
+</html>
+
+
+
+$correo = $_SESSION["correo"];
+$objeto = new metodos();
+
+$sql = "SELECT id FROM usuarios WHERE correo = '$correo'";
+$datos = $objeto->mostrarDatos($sql);
+$id_estud = json_encode($datos[0]['id']);

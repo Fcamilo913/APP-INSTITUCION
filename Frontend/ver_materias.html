@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materias Matriculadas</title>
+    <link rel="stylesheet" href="lista_est.css">
+</head>
+<body>
+
+    <style>
+
+        /* lista_est.css */
+
+/* Estilo general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Estilo de la tabla */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+caption {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+thead {
+    background-color: #000b18;
+    color: #ffffff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    border-bottom: 2px solid #00162e;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Estilo del botón */
+.matricular-btn {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.matricular-btn:hover {
+    background-color: #218838;
+}
+
+    </style>
+    <table>
+        <caption>Materias</caption>
+        <thead>
+            <tr>
+                <th>Nombre de la Materia</th>
+                <th>Nombre del Profesor</th>
+                <th>Código</th>
+                <th>Horario</th>
+                <th>Acciones</th> <!-- Nueva columna para el botón -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Matemáticas</td>
+                <td>Dr. Juan Pérez</td>
+                <td>1234</td>
+                <td>Lunes y Miércoles 10:00 - 11:30</td>
+                <td><button class="matricular-btn">Matricular</button></td> <!-- Botón agregado -->
+            </tr>
+            <tr>
+                <td>Historia</td>
+                <td>Lic. María Gómez</td>
+                <td>5678</td>
+                <td>Martes y Jueves 09:00 - 10:30</td>
+                <td><button class="matricular-btn">Matricular</button></td> <!-- Botón agregado -->
+            </tr>
+            <tr>
+                <td>Biología</td>
+                <td>Prof. Carlos Ruiz</td>
+                <td>9101</td>
+                <td>Lunes y Miércoles 14:00 - 15:30</td>
+                <td><button class="matricular-btn">Matricular</button></td> <!-- Botón agregado -->
+            </tr>
+            <tr>
+                <td>Química</td>
+                <td>Dr. Ana López</td>
+                <td>1122</td>
+                <td>Martes y Jueves 11:00 - 12:30</td>
+                <td><button class="matricular-btn">Matricular</button></td> <!-- Botón agrega
+
+
+                

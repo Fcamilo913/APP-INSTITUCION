@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes Matriculados</title>
+    <style>
+        /* Estilo general del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        caption {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            border-bottom: 2px solid #007bff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Estilo de los botones */
+        .action-btn {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-btn.attendance {
+            background-color: #17a2b8;
+        }
+
+        .action-btn.grades {
+            background-color: #ffc107;
+        }
+
+        .action-btn.attendance:hover {
+            background-color: #138496;
+        }
+
+        .action-btn.grades:hover {
+            background-color: #e0a800;
+        }
+
+        /* Estilo de la columna de Estado */
+        .status-approved {
+            color: #28a745;
+        }
+
+        .status-failed {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>Curso de Matemáticas</caption>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Estado</th> <!-- Nueva columna para el Estado -->
+                <th>Acciones</th> <!-- Columna para los botones -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pedro</td>
+                <td>García</td>
+                <td class="status-approved">Aprobado</td> <!-- Estado del estudiante -->
+                <td>
+                    <button class="action-btn attendance">Asistencia</button>
+                    <button class="action-btn grades">Notas</button>
+                </td>
+            </tr>
+            <tr>
+                <td>María</td>
+                <td>Fernández</td>
+                <td class="status-failed">Desaprobado</td> <!-- Estado del estudiante -->
+                <td>
+                    <button class="action-btn attendance">Asistencia</button>
+                    <button class="action-btn grades">Notas</button>
+                </td>
+            </tr>
+            <tr>
+                <td>José</td>
+                <td>Martínez</td>
+                <td class="status-approved">Aprobado</td> <!-- Estado del estudiante -->
+                <td>
+                    <button class="action-btn attendance">Asistencia</button>
+                    <button class="action-btn grades">Notas</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Ana</td>
+                <td>Lopez</td>
+                <td class="status-failed">Desaprobado</td> <!-- Estado del estudiante -->
+                <td>
+                    <button class="action-btn attendance">Asistencia</button>
+                    <button class="action-btn grades">Notas</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
