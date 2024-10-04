@@ -146,26 +146,72 @@ class metodos {
     public function asignarProfesorEstudiante($id_estud, $id_prof) {
         $dato = new conectar();
         $conexion = $dato->conexion();
+
+        try {
+            $sql_insertar = "INSERT INTO profe_estudiante (id_profesor, id_estudiante) VALUES ($id_estud, $id_prof)";
+            if (mysqli_query($conexion, $sql_insertar)) {
+                return true;
+            } else {
+                echo "Error en la consulta: " . mysqli_error($conexion);
+                return false;
+            }
+        } catch (Exception) {
+            echo "Error ya te encuentras matriculado";
+        }
+
+    }
+
+    public function insertarNota($id_profesor, $id, $nota){
+        $dato = new conectar();
+        $conexion = $dato->conexion();
     
-        // Crear la consulta SQL directamente con los valores
-        $sql = "INSERT INTO profe_estudiante (id_profesor, id_estudiante) VALUES ($id_estud, $id_prof)";
+        $sql = "INSERT INTO notas (id_profesor, id_estudiante ,nota) VALUES ('$id_profesor', '$id', '$nota')";
+        return mysqli_query($conexion, $sql);
+    }
 
 
-        print_r($sql);
 
+    function protegerSesion() {
+        // Configuraciones iniciales para la sesión
+        ini_set('session.cookie_httponly', 1); // Previene el acceso a la cookie por JavaScript
+        ini_set('session.cookie_secure', 1);   // Solo permite cookies de sesión a través de HTTPS
+        ini_set('session.use_strict_mode', 1); // Solo acepta IDs de sesión generados por el servidor
+        ini_set('session.use_only_cookies', 1); // Desactiva el uso de IDs de sesión en la URL
     
-        // Ejecutar la consulta directamente
-        if (mysqli_query($conexion, $sql)) {
-            // Si la consulta se ejecuta correctamente
-            return true;
-        } else {
-            // Capturar el error específico de MySQL y mostrarlo
-            echo "Error en la consulta: " . mysqli_error($conexion);
-            return false;
+        // Si la sesión ya está iniciada, protege los datos
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    
+        // Regenerar el ID de sesión para prevenir fijación de sesión
+        if (!isset($_SESSION['session_regenerated'])) {
+            session_regenerate_id(true);
+            $_SESSION['session_regenerated'] = true;
+        }
+    
+        // Verificar IP y User-Agent
+        if (!isset($_SESSION['ip_address'])) {
+            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; // Almacenar la IP
+        }
+    
+        if (!isset($_SESSION['user_agent'])) {
+            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // Almacenar el User-Agent
+        }
+    
+        // Comparar la IP y el User-Agent para detectar posibles secuestros de sesión
+        if ($_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR'] || $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
+            session_unset(); // Limpiar los datos de la sesión
+            session_destroy(); // Destruir la sesión
+            header("Location: login.html"); // Redirigir al login o mostrar un mensaje de error
+            exit();
         }
     }
     
-     
+
+
+
+    
+
 }
 
     

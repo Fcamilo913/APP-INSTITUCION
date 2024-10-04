@@ -2,6 +2,8 @@
 
 session_start(); // Iniciar la sesión
 
+
+
 require_once "conexion.php";
 require_once "metodosCrud.php";
 

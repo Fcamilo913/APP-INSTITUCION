@@ -5,7 +5,7 @@ class conectar{
     // Atributos de la conexion de la base de datos.
     private $servidor="localhost";
     private $usuario="root";
-    private $bd="institucion";
+    private $bd="instituto";
     private $password="";
 
     // Metodo de la conexion de la base de datos.

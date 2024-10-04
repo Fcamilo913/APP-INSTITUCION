@@ -2,6 +2,9 @@
 require_once "conexion.php";
 require_once "metodosCrud.php";
 
+// Activar el reporte de errores y mostrarlos
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Verifica que los campos esperados están presentes en $_POST
 if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contraseña'], $_POST['rol'])) {
@@ -20,8 +23,6 @@ if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contra
     $datos_usuario = array($nombre, $apellido, $correo, $hassPassword, $rol);
     $id_insert = $objeto->insertarUsuario($datos_usuario);
 
-    print_r("IDDDD " . json_encode($id_insert));
-
     if ($id_insert) {
         $resultado_insercion = true; // Suponemos éxito a menos que se demuestre lo contrario
 
@@ -31,8 +32,6 @@ if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contra
                 $nombre_asignatura = $_POST['materia'];
                 $datos_academicos = array($id_insert, $nombre_asignatura);
                 $resultado_insercion = $objeto->insertarMateria($datos_academicos);
-                print_r("resultado_insercion " . json_encode($id_insert));
-
                 if ($resultado_insercion > 0){
                     header('Location: ../Frontend/registro_exitoso.html');
                 }
@@ -45,11 +44,8 @@ if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contra
                 header('Location: ../Frontend/registro_exitoso.html');
             }
         } elseif ($rol === 'Administrador') {
-            // Inserción en la tabla de estudiantes (parece incorrecto, ¿quieres insertar en otra tabla?)
-            $resultado_insercion = $objeto->insertarUsuario($datos_usuario);  // ¿Es esto lo que quieres?
-            if ($resultado_insercion > 0){
-                header('Location: ../Frontend/registro_exitoso.html');
-            }
+            // No es necesario insertar el usuario de nuevo para los administradores.
+            header('Location: ../Frontend/registro_exitoso.html');
         }
 
         if ($resultado_insercion) {
@@ -67,3 +63,4 @@ if (isset($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['contra
     $mensaje = "Faltan datos en el formulario.";
     $mensaje_clase = "error";
 }
+
